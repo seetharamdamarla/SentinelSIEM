@@ -58,13 +58,13 @@ Custom Wazuh rules in `rules/custom_detections.xml` mapped to MITRE ATT&CK:
 
 | Rule ID | Level | Description | MITRE Technique |
 |---------|-------|-------------|-----------------|
-| 100001 | 10 🟠 | SSH Brute Force — Existing User | T1110.001 |
-| 100002 | 12 🔴 | Unauthorized File Modification (FIM) | T1547, T1565 |
-| 100003 | 8 🟠 | New macOS User Account Created | T1078, T1136.001 |
-| 100004 | 11 🟠 | Privilege Escalation — Failed Sudo | T1068 |
-| 100005 | 9 🟠 | Suspicious Payload Download | T1105, T1059.004 |
-| 100006 | 14 🔴 | Threat Intel IOC Match (Malicious IP) | T1071 |
-| 100007 | 10 🟠 | SSH Brute Force — Non-Existent User | T1110.003 |
+| 100001 | 10 | SSH Brute Force — Existing User | T1110.001 |
+| 100002 | 12 | Unauthorized File Modification (FIM) | T1547, T1565 |
+| 100003 | 08 | New macOS User Account Created | T1078, T1136.001 |
+| 100004 | 11 | Privilege Escalation — Failed Sudo | T1068 |
+| 100005 | 09 | Suspicious Payload Download | T1105, T1059.004 |
+| 100006 | 14 | Threat Intel IOC Match (Malicious IP) | T1071 |
+| 100007 | 10 | SSH Brute Force — Non-Existent User | T1110.003 |
 
 ### Alert Severity Classification
 ```
