@@ -140,7 +140,7 @@ rule.groups: syscheck AND rule.groups: syscheck_entry_modified
 
 ---
 
-## 🔧 Importing/Recreating Dashboards
+## Importing/Recreating Dashboards
 
 If you need to set up this environment from scratch:
 
