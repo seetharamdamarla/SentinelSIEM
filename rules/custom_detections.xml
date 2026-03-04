@@ -1,0 +1,79 @@
+<group name="custom_mac_soc,">
+  <!-- Brute Force: Existing user SSH failures -->
+  <rule id="100001" level="10" frequency="6" timeframe="120">
+    <if_matched_sid>5716</if_matched_sid>
+    <same_source_ip />
+    <description>Multiple SSH Failed Login Attempts - Existing User (Brute Force)</description>
+    <mitre>
+      <id>T1110</id>
+      <id>T1110.001</id>
+    </mitre>
+    <group>authentication_failures, brute_force,</group>
+  </rule>
+
+  <!-- Brute Force: Non-existent user SSH failures (user enumeration) -->
+  <rule id="100007" level="10" frequency="6" timeframe="120">
+    <if_matched_sid>5710</if_matched_sid>
+    <same_source_ip />
+    <description>Multiple SSH Failed Login Attempts - Non-Existent User (Brute Force + Enumeration)</description>
+    <mitre>
+      <id>T1110</id>
+      <id>T1110.003</id>
+    </mitre>
+    <group>authentication_failures, brute_force, enumeration,</group>
+  </rule>
+
+  <rule id="100002" level="12">
+    <if_sid>550</if_sid>
+    <match>/etc/passwd|/etc/shadow|/etc/hosts|/var/log/auth.log</match>
+    <description>Unauthorized Modification of Critical System File: $(file)</description>
+    <mitre>
+      <id>T1547</id>
+      <id>T1565</id>
+    </mitre>
+    <group>fim, integrity, configuration_modification,</group>
+  </rule>
+
+  <rule id="100003" level="8">
+    <if_sid>530</if_sid>
+    <match>Created user account</match>
+    <description>New macOS User Account Created</description>
+    <mitre>
+      <id>T1078</id>
+      <id>T1136.001</id>
+    </mitre>
+    <group>account_creation, user_management,</group>
+  </rule>
+
+  <rule id="100004" level="11" frequency="3" timeframe="120">
+    <if_matched_sid>5402</if_matched_sid>
+    <same_source_ip />
+    <description>Privilege Escalation Attempt: Multiple failed sudo commands</description>
+    <mitre>
+      <id>T1068</id>
+    </mitre>
+    <group>privilege_escalation, authentication_failures,</group>
+  </rule>
+
+  <rule id="100005" level="9">
+    <if_sid>530</if_sid>
+    <match>curl -sL|wget -qO-|nc -e</match>
+    <description>Suspicious System Behavior: Potential Malicious Payload Download or Reverse Shell</description>
+    <mitre>
+      <id>T1105</id>
+      <id>T1059.004</id>
+    </mitre>
+    <group>suspicious_activity, command_execution,</group>
+  </rule>
+
+  <rule id="100006" level="14">
+    <if_sid>530, 5716, 100001</if_sid>
+    <list field="srcip" lookup="address_match_key">etc/lists/malicious_ips</list>
+    <description>Threat Intel Match: Interaction with Known Malicious IP ($(srcip))</description>
+    <mitre>
+      <id>T1071</id>
+    </mitre>
+    <group>threat_intel, ioc_match, critical_alert,</group>
+  </rule>
+
+</group>
